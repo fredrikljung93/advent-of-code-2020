@@ -15,4 +15,17 @@ def part_one():
     return -1
 
 
-print(part_one())
+def part_two():
+    for x in numbersCount:
+        for y in numbersCount:
+            for z in numbersCount:
+                xn = numbers[x]
+                xy = numbers[y]
+                xz = numbers[z]
+                if xn + xy + xz == 2020:
+                    return xn * xy * xz
+    return -1
+
+
+print("Part 1:", part_one())
+print("Part 2:", part_two())
