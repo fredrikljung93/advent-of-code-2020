@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+from functools import reduce
 
 path = 'puzzleinputs/day3.txt'
 
@@ -7,14 +8,23 @@ linesCount = len(lines)
 width = len(lines[0])
 
 
-def part_1(count, x, y):
-    if y == linesCount:
+def travel(count, x, y, dx, dy):
+    if y >= linesCount:
         return count
     else:
-        return part_1(
+        return travel(
             count + (1 if lines[y][x] == '#' else 0),
-            (x + 3) % width,
-            y + 1)
+            (x + dx) % width,
+            y + dy,
+            dx,
+            dy)
 
 
-print(part_1(0, 0, 0))
+print("Part 1:", travel(0, 0, 0, 3, 1))
+
+print("Part2:", reduce((lambda x, y: x * y), [travel(0, 0, 0, 1, 1),
+                                              travel(0, 0, 0, 3, 1),
+                                              travel(0, 0, 0, 5, 1),
+                                              travel(0, 0, 0, 7, 1),
+                                              travel(0, 0, 0, 1, 2)
+                                              ]))
